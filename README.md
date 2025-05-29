@@ -54,7 +54,7 @@ git clone https://github.com/seu-usuario/erp-montink.git
 ### 2. Ajustando Banco de Dados
 Configure o banco de dados
 Crie um banco MySQL chamado mini_erp
-
+```sh
 Importe o arquivo /sql/mini_erp.sql
 CREATE DATABASE mini_erp;
 
@@ -66,7 +66,7 @@ $host = 'localhost';
 $user = 'root';
 $pass = 'sua_senha';
 $db   = 'mini_erp';
-
+````
 🔒 Segurança
 Uso de prepared statements para evitar SQL Injection
 
