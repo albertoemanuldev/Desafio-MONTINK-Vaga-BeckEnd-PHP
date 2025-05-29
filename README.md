@@ -4,6 +4,7 @@ Este é um **Mini ERP (Enterprise Resource Planning)** desenvolvido em **PHP pur
 
 ## 🧱 Estrutura do Projeto
 
+```sh
 ERP_MONTINK/
 ├── assets/css/ # Estilos com Twinland + Bootstrap
 ├── config/ # Configurações gerais (conexão DB)
@@ -19,7 +20,7 @@ ERP_MONTINK/
 │ └── produtos/ # form.php, index.php, lista.php
 ├── .htaccess # Reescrita de URLs (mod_rewrite)
 └── README.md # Este arquivo
-
+````
 ---
 
 ## ⚙️ Tecnologias Utilizadas
