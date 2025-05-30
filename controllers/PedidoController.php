@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../models/Pedido.php';
 require_once __DIR__ . '/../models/Produto.php';
+require_once __DIR__ . '/../utils/Mailer.php';
 
 class PedidoController {
     public function finalizar() {
@@ -10,9 +11,17 @@ class PedidoController {
             header('Location: ?controller=carrinho');
             exit;
         }
+        $email = $_POST['email'] ?? '';
         $cep = $_POST['cep'] ?? '';
         $endereco = $_POST['endereco'] ?? '';
         $cupom = $_POST['cupom'] ?? '';
+        
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['erro'] = 'E-mail inválido!';
+            header('Location: ?controller=carrinho');
+            exit;
+        }
+        
         $subtotal = 0;
         foreach ($carrinho as $item) {
             $subtotal += $item['preco'] * $item['quantidade'];
@@ -35,23 +44,35 @@ class PedidoController {
             Produto::baixarEstoque($item['produto_id'], $item['variacao'], $item['quantidade']);
         }
         // Envio de e-mail
-        $to = 'seuemail@seudominio.com'; // Altere para o e-mail desejado
-        $subject = 'Novo Pedido #' . $pedido_id;
-        $body = "Novo pedido realizado!\n\n";
-        $body .= "Endereço: $endereco\nCEP: $cep\n\n";
-        $body .= "Itens:\n";
-        foreach ($carrinho as $item) {
-            $body .= "- {$item['nome']} ({$item['variacao']}) x {$item['quantidade']} = R$ ".number_format($item['preco'] * $item['quantidade'],2,',','.')."\n";
-        }
-        $body .= "\nSubtotal: R$ ".number_format($subtotal,2,',','.')."\n";
-        $body .= "Frete: R$ ".number_format($frete,2,',','.')."\n";
-        $body .= "Desconto: R$ ".number_format($desconto,2,',','.')."\n";
-        $body .= "Total: R$ ".number_format($total,2,',','.')."\n";
-        @mail($to, $subject, $body);
+        $email_enviado = Mailer::enviarEmailPedido($pedido_id, $endereco, $cep, $carrinho, $subtotal, $frete, $desconto, $total, $email);
+        
+        // Armazena informações do pedido na sessão para o pop-up
+        $_SESSION['pedido_finalizado'] = [
+            'id' => $pedido_id,
+            'email' => $email,
+            'endereco' => $endereco,
+            'cep' => $cep,
+            'itens' => $carrinho,
+            'subtotal' => $subtotal,
+            'frete' => $frete,
+            'desconto' => $desconto,
+            'total' => $total,
+            'email_enviado' => $email_enviado
+        ];
+        
         unset($_SESSION['carrinho']);
-        $_SESSION['msg'] = 'Pedido realizado com sucesso!';
-        header('Location: ?controller=pedido&action=historico');
+        header('Location: ?controller=pedido&action=confirmacao');
         exit;
+    }
+
+    public function confirmacao() {
+        if (!isset($_SESSION['pedido_finalizado'])) {
+            header('Location: ?controller=pedido&action=historico');
+            exit;
+        }
+        $pedido = $_SESSION['pedido_finalizado'];
+        unset($_SESSION['pedido_finalizado']);
+        include __DIR__ . '/../views/pedidos/confirmacao.php';
     }
 
     public function historico() {

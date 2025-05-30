@@ -68,6 +68,10 @@
       ?>
       <form method="post" action="?controller=pedido&action=finalizar" id="formFinalizarPedido" class="space-y-3">
         <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">E-mail para Recebimento</label>
+          <input type="email" name="email" class="w-full rounded border-gray-300" placeholder="seu@email.com" required>
+        </div>
+        <div>
           <label class="block text-sm font-semibold text-gray-700 mb-1">CEP para Entrega</label>
           <div class="flex gap-2">
             <input type="text" name="cep" id="cep" class="flex-1 rounded border-gray-300" placeholder="00000-000" required maxlength="9">
