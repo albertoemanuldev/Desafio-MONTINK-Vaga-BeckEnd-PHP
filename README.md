@@ -22,13 +22,7 @@ ERP_MONTINK/
 └── README.md # Este arquivo
 ````
 ---
-## Imagens do Desafio
 
-![Captura de tela 2025-05-29 204922](https://github.com/user-attachments/assets/0ed19088-b0e9-498c-a23a-55ed0557721d)
-![Captura de tela 2025-05-29 204914](https://github.com/user-attachments/assets/9b0956b7-59d2-4402-815c-bdf962e7167c)
-![Captura de tela 2025-05-29 204900](https://github.com/user-attachments/assets/8379b420-8ee8-4df4-8343-26e96800514c)
-![Captura de tela 2025-05-29 204802](https://github.com/user-attachments/assets/09648d5c-327f-4434-bbec-6f9ef431d265)
-![Captura de tela 2025-05-29 204932](https://github.com/user-attachments/assets/b87ffe07-9d0b-4a9b-b4ef-4450183041d0)
 
 ## ⚙️ Tecnologias Utilizadas
 
