@@ -9,8 +9,6 @@ class Pedido {
         $stmt = $pdo->prepare("INSERT INTO pedidos (subtotal, frete, total, cep, endereco, status) VALUES (?, ?, ?, ?, ?, 'pendente')");
         $stmt->execute([$subtotal, $frete, $total, $cep, $endereco]);
         $pedido_id = $pdo->lastInsertId();
-        // Itens do pedido (simples: salvar em uma tabela ou campo json, aqui só exemplo)
-        // Você pode criar uma tabela pedido_itens para detalhar
         $pdo->commit();
         return $pedido_id;
     }

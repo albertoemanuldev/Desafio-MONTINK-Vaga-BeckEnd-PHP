@@ -13,7 +13,7 @@ class Mailer {
             
             // Configurações do servidor
             self::$mailer->isSMTP();
-            self::$mailer->Host = 'smtp.gmail.com'; // Altere para seu servidor SMTP
+            self::$mailer->Host = 'smtp.gmail.com'; 
             self::$mailer->SMTPAuth = true;
             self::$mailer->Username = 'seu-email@gmail.com'; // Altere para seu e-mail
             self::$mailer->Password = 'sua-senha'; // Altere para sua senha

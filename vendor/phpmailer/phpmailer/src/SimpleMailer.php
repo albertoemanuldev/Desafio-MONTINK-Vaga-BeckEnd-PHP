@@ -2,9 +2,7 @@
 
 namespace PHPMailer\PHPMailer;
 
-/**
- * SimpleMailer - Uma versão simplificada do PHPMailer para uso básico
- */
+
 class SimpleMailer
 {
     private $mailer;
